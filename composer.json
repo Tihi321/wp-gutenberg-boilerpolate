@@ -1,0 +1,17 @@
+{
+    "name": "gutenberg",
+    "description": "",
+    "type": "project",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Tihomir Selak",
+            "email": "tknox.dr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}
