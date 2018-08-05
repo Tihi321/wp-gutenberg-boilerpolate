@@ -7,8 +7,8 @@
  * @license     GPL2+
  *
  * Plugin Name: Gutenberg Boilerplate - Blocks
- * Plugin URI:  https://gutenberg.courses
- * Description: A plugin containing gutenberg blocks
+ * Plugin URI:  https://github.com/Tihi321/wp-gutenberg-boilerpolate
+ * Description: A plugin boilerplate for creating gutenberg blocks.
  * Version:     1.0.0
  * Author:      Tihomir Selak
  * Author URI:  https://tihomir-selak.from.hr

@@ -2,6 +2,10 @@ This boilerplate is done on top of [Create Guten Block](https://github.com/ahmad
 
 It uses Object oriented approach of creating plugins.
 
+After you update folder, file, plugin name and text domain upon creating a new project, rename variables in these files
+- src/plugin-data.js -> pluginData.domain with text domain
+- inc/base/base-controller.php -> PLUGIN_FILE_NAME with root filename of the plugin, PLUGIN_DOMAIN with text domain
+
 Below you will find some information on how to run scripts.
 
 ## 👉  `npm start`
