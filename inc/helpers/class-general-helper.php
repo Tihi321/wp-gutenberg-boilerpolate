@@ -2,50 +2,53 @@
 /**
  * The general helper specific functionality.
  *
- * @since   2.0.0
- * @package  Gutenberg_Boilerplate\Helpers
+ * @since   1.0.0
+ * @package  WP_Gutenberg_Boilerplate\Inc\Helpers
  */
 
 namespace Inc\Helpers;
 
-use Inc\Base\Base_Controller;
+use Inc\Helpers\Consts;
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Class General Helper
  */
 class General_Helper {
 
-	public $base_controller;
-
-	public function __construct() {
-		$this->base_controller = new Base_Controller();
-
-	}
-
 		/**
-	 * Gets this plugin's absolute directory path.
-	 *
-	 * @since  2.1.0
-	 * @ignore
-	 * @access private
-	 *
-	 * @return string
+	 * AGB needs WP 5.0+ or Gutenberg Plugin to work
 	 */
-	function _get_plugin_directory() {
-		return $this->base_controller->plugin_path;
+
+	public function check_compatibility() {
+		global $wp_version;
+
+		if ( ! version_compare( $wp_version, '5.0', '>=' ) and ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
+
+			deactivate_plugins( Consts::get_basename() );
+			add_action( 'admin_notices', array( $this , 'compatibility_notice') );
+		}
 	}
+
+	public function compatibility_notice() {
+		?>
+		<div class="error notice is-dismissible">
+			<p><?php _e( 'All Gutenberg Blocks requires WordPress 5.0 or Gutenberg plugin to be activated', Consts::TEXT_DOMAIN ); ?></p>
+		</div>
+		<?php
+	}
+
 
 	/**
-	 * Gets this plugin's URL.
-	 *
-	 * @since  2.1.0
-	 * @ignore
-	 * @access private
-	 *
-	 * @return string
+	 * Load text domain
 	 */
-	function _get_plugin_url() {
-		return $this->base_controller->plugin_url;
+
+	public function load_textdomain() {
+	  load_plugin_textdomain( Consts::TEXT_DOMAIN, false, Consts::get_path() . '/languages' );
 	}
 
 }

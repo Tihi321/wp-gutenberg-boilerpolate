@@ -1,5 +1,5 @@
 const pluginData = {};
-pluginData.domain = "plugin-domain";
-pluginData.blockName01 = "block01";
+pluginData.pluginName = 'wp-gutenberg-boilerplate';
+pluginData.textDomain = 'wp-boilerplate';
 
 export default pluginData;

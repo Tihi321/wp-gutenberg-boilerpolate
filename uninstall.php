@@ -3,7 +3,8 @@
 /**
  * Trigger this file on Plugin uninstall
  *
- * @package  Gutenberg_Boilerplate
+ * @since   1.0.0
+ * @package  WP_Gutenberg_Boilerplate
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {

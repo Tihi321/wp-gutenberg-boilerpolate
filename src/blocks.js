@@ -12,4 +12,4 @@ import "./i18n.js";
  * Webpack is compiling as the input file.
  */
 
-import "./blocks/01-block";
+import "./blocks/wp-example-block";

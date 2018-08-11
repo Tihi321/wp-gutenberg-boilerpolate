@@ -1,16 +1,22 @@
 <?php
 /**
- * @package  Gutenberg_Boilerplate\Base
+ * @since   1.0.0
+ * @package  WP_Gutenberg_Boilerplate\Inc\Base
  */
 
  namespace Inc\Base;
 
- use Inc\Base\Base_Controller;
+ // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+ use Inc\Helpers\Consts;
 
 /**
 *
 */
-class Enqueue extends Base_Controller
+class Enqueue
 {
 	public function register() {
 
@@ -30,31 +36,47 @@ class Enqueue extends Base_Controller
 
 		// Enqueue the bundled block JS file
 		wp_enqueue_script(
-			self::PLUGIN_DOMAIN . '-blocks-js',
-			$this->plugin_url . self::EDITOR_JS_PATH,
+			Consts::SCRIPTS_DOMAIN_EDITOR,
+			Consts::get_url() . Consts::EDITOR_JS_PATH,
 			[ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components' ],
-			filemtime( $this->plugin_path . self::EDITOR_JS_PATH )
+			filemtime( Consts::get_path() . Consts::EDITOR_JS_PATH )
+		);
+
+		// Set always after script_add_data or it won't show
+		wp_localize_script(
+			Consts::SCRIPTS_DOMAIN_EDITOR,
+			Consts::LOCALIZE_SCRIPTS_PREFIX . '_globals',
+			array(
+				'ajaxurl' => admin_url('admin-ajax.php'),
+				'pluginurl' => Consts::get_url(),
+			)
 		);
 
 		// Enqueue optional editor only styles
 		wp_enqueue_style(
-			self::PLUGIN_DOMAIN . '-blocks-editor-css',
-			$this->plugin_url . self::EDITOR_STYLE_PATH,
+			Consts::PLUGIN_NAME . '-blocks-editor-css',
+			Consts::get_url() . Consts::EDITOR_STYLE_PATH,
 			[ 'wp-blocks' ],
-			filemtime( $this->plugin_path . self::EDITOR_STYLE_PATH )
+			filemtime( Consts::get_path() . Consts::EDITOR_STYLE_PATH )
 		);
+
+		// Get translations
+		$locale  = gutenberg_get_jed_locale_data( Consts::TEXT_DOMAIN );
+		$content = 'wp.i18n.setLocaleData(' . json_encode( $locale ) . ', "' . Consts::TEXT_DOMAIN . '" );';
+		wp_script_add_data( Consts::PLUGIN_NAME, 'data', $content );
+
 	}
 
 
 	/**
-	 * Enqueue front end and editor JavaScript and CSS assets.
+	 * Enqueue frontend and editor JavaScript and CSS assets.
 	 */
 	function enqueue_assets() {
 		wp_enqueue_style(
-			self::PLUGIN_DOMAIN . '-blocks',
-			$this->plugin_url . self::FRONTEND_STYLE_PATH,
+			Consts::PLUGIN_NAME . '-blocks',
+			Consts::get_url() . Consts::FRONTEND_STYLE_PATH,
 			[ 'wp-blocks' ],
-			filemtime( $this->plugin_path . self::FRONTEND_STYLE_PATH )
+			filemtime( Consts::get_path() . Consts::FRONTEND_STYLE_PATH )
 		);
 	}
 
@@ -63,16 +85,27 @@ class Enqueue extends Base_Controller
 	 * Enqueue frontend JavaScript and CSS assets.
 	 */
 	function enqueue_frontend_assets() {
+
 		// If in the backend, bail out.
 		if ( is_admin() ) {
 			return;
 		}
 
 		wp_enqueue_script(
-			self::PLUGIN_DOMAIN . '-blocks-frontend',
-			$this->plugin_url . self::FRONTEND_JS_PATH,
-			[],
-			filemtime( $this->plugin_path . self::FRONTEND_JS_PATH )
+			Consts::SCRIPTS_DOMAIN_FRONTEND,
+			Consts::get_url() . Consts::FRONTEND_JS_PATH,
+			[ 'jquery' ],
+			filemtime( Consts::get_path() . Consts::FRONTEND_JS_PATH )
+		);
+
+		// Set always after script_add_data or it won't show
+		wp_localize_script(
+			Consts::SCRIPTS_DOMAIN_FRONTEND,
+			Consts::LOCALIZE_SCRIPTS_PREFIX . '_globals',
+			array(
+				'ajaxurl' => admin_url('admin-ajax.php'),
+				'pluginurl' => Consts::get_url(),
+			)
 		);
 	}
 

@@ -2,17 +2,17 @@
 /**
  * Plugin's bootstrap file to launch the plugin.
  *
- * @package     Gutenberg_Boilerplate
+ * @package     WP_Gutenberg_Boilerplate
  * @author      Tihomir Selak
  * @license     GPL2+
  *
- * Plugin Name: Gutenberg Boilerplate - Blocks
+ * Plugin Name: WP Gutenberg Boilerplate - Blocks
  * Plugin URI:  https://github.com/Tihi321/wp-gutenberg-boilerpolate
  * Description: A plugin boilerplate for creating gutenberg blocks.
  * Version:     1.0.0
  * Author:      Tihomir Selak
  * Author URI:  https://tihomir-selak.from.hr
- * Text Domain: plugin-domain
+ * Text Domain: wp-boilerplate
  * Domain Path: /languages
  * License:     GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,5 +49,5 @@ register_deactivation_hook( __FILE__, 'deactivate_gutenberg_blocks' );
  * Initialize all the core classes of the plugin
  */
 if ( class_exists( 'Inc\\Init' ) ) {
-	Inc\Init::register_services();
+	Inc\Init::register();
 }
