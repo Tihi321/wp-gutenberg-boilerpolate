@@ -21,6 +21,24 @@ It uses Object oriented approach of creating plugins, with one dynamic example p
   "phpfmt.indent_with_space": 2,
   "phpfmt.psr2": false,
   "phpfmt.cakephp": true,
+  "phpfmt.passes": [
+    "DoubleToSingleQuote",
+    "GeneratePHPDoc",
+    "NewLineBeforeReturn",
+    "SpaceAroundParentheses",
+    "SpaceBetweenMethods",
+    "SpaceAfterExclamationMark",
+    "AddMissingParentheses",
+    "AlignDoubleSlashComments",
+    "AlignEquals",
+    "AlignGroupDoubleArrow",
+    "AutoSemicolon",
+    "MergeNamespaceWithOpenTag",
+    "NewLineBeforeReturn",
+    "PrettyPrintDocBlocks",
+    "ReplaceBooleanAndOr",
+    "SortUseNameSpace",
+  ]
 ```
 
 # Requirements
