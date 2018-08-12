@@ -4,9 +4,8 @@
  *
  * Text Domain: wp-boilerplate
  *
- * @package  WP_Gutenberg_Boilerplate\Inc\Base
- *
  * @since   1.0.0
+ * @package  WP_Gutenberg_Boilerplate\Inc\Base
  */
 
 namespace Inc\Base;

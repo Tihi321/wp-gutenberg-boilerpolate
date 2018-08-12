@@ -22,7 +22,6 @@
       "AutoSemicolon",
       "MergeNamespaceWithOpenTag",
       "NewLineBeforeReturn",
-      "PrettyPrintDocBlocks",
       "ReplaceBooleanAndOr",
       "SortUseNameSpace",
     ],

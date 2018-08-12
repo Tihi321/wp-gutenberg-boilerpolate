@@ -1,4 +1,4 @@
-A Gutenberg boilerplate to help WordPress theme and plugin developers get started developing with the upcoming new editor.
+Yet another Gutenberg boilerplate to help bootstrap plugin development. It follows Wordpress and Infinum coding standards for PHP, Javascript and styles.
 
 # VS Code Recommended Plugins
 
@@ -35,7 +35,6 @@ A Gutenberg boilerplate to help WordPress theme and plugin developers get starte
     "AutoSemicolon",
     "MergeNamespaceWithOpenTag",
     "NewLineBeforeReturn",
-    "PrettyPrintDocBlocks",
     "ReplaceBooleanAndOr",
     "SortUseNameSpace",
   ]
