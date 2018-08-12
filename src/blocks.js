@@ -1,5 +1,5 @@
 // Set localization domain
-import "./i18n.js";
+import './i18n';
 
 /**
  * Gutenberg Blocks
@@ -12,4 +12,4 @@ import "./i18n.js";
  * Webpack is compiling as the input file.
  */
 
-import "./blocks/wp-example-block";
+import './blocks/wp-example-block';

@@ -1,2 +1,3 @@
-import pluginData from "./plugin-data";
-wp.i18n.setLocaleData({ "": {} }, pluginData.textDomain);
+import pluginData from './plugin-data';
+
+wp.i18n.setLocaleData({'': {}}, pluginData.textDomain);

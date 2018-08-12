@@ -1,17 +1,34 @@
 {
-    "name": "gutenberg",
-    "description": "",
-    "type": "project",
-    "license": "GPL-3.0",
-    "authors": [
-        {
-            "name": "Tihomir Selak",
-            "email": "tknox.dr@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {},
-    "autoload": {
-        "psr-4": {"Inc\\": "./inc"}
-    }
+	"name": "gutenberg",
+	"description": "",
+	"type": "project",
+	"license": "GPL-3.0",
+	"authors": [{
+		"name": "Tihomir Selak",
+		"email": "tknox.dr@gmail.com"
+	}],
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Inc\\": "./inc"
+		}
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "*",
+		"infinum/coding-standards-wp": "^0.2.8"
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"\"vendor/bin/phpcs\" --config-set installed_paths vendor/infinum/coding-standards-wp"
+		],
+		"post-update-cmd": [
+			"\"vendor/bin/phpcs\" --config-set installed_paths vendor/infinum/coding-standards-wp"
+		]
+	},
+	"config": {
+		"sort-packages": true,
+		"optimize-autoloader": true
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }
