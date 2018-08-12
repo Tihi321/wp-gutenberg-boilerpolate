@@ -60,15 +60,13 @@ Below you will find some information on how to run scripts.
 - Use to build production code for your block inside `assets` folder.
 - Runs once and reports back the gzip file sizes of the produced code.
 
----
-
-## Lints JS and SASS
+# Lints JS and SASS
 
 ```bash
 npm run precommit
 ```
 
-## Linting PHP
+# Linting PHP
 
 Plugin is using [Infinum coding standards for WordPress](https://github.com/infinum/coding-standards-wp) to check php files.
 
@@ -86,7 +84,7 @@ Autofix php for minor violations:
 npm run autofixPhp
 ```
 
-## Note
+# Note
 
 This plugin uses OOP with namespaces and autoloader.
 
@@ -95,5 +93,7 @@ When you add new class in your theme, be sure to run
 ```bash
 composer -o dump-autoload
 ```
+
+---
 
 This boilerplate was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block) and [Advanced Gutenberg Blocks](https://advanced-gutenberg-blocks.com/).
