@@ -106,7 +106,7 @@ class Enqueue {
       filemtime( Consts::get_path() . Consts::FRONTEND_JS_PATH )
     );
 
-    // Set always after script_add_data or it won't show
+    // Set always after script_add_data or it won't show.
     wp_localize_script(
       Consts::SCRIPTS_DOMAIN_FRONTEND,
       Consts::LOCALIZE_SCRIPTS_PREFIX . '_globals',
