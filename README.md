@@ -1,4 +1,4 @@
-It uses Object oriented approach of creating plugins, with one dynamic example plugin.
+A Gutenberg boilerplate to help WordPress theme and plugin developers get started developing with the upcoming new editor.
 
 # VS Code Recommended Plugins
 
