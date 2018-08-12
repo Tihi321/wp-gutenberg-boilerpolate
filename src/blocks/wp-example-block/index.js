@@ -15,7 +15,7 @@ const {registerBlockType} = wp.blocks;
 /**
  * Register block
  */
-export default registerBlockType(pluginData.pluginName + '/wp-example-block', {
+export default registerBlockType(`${pluginData.pluginName}/wp-example-block`, {
   title: __('Title of the block', pluginData.textDomain),
   description: __('Description for the side panel', pluginData.textDomain),
   category: 'common',
