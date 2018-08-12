@@ -1,8 +1,15 @@
 {
-  "name": "my-block-cgb-guten-block",
+  "name": "wp-gutenberg-boilerplate",
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "__eslintPlugin": "eslint src/",
+    "__stylelintPlugin": "stylelint \"src/**/**/*.scss\" --syntax scss",
+    "precommitCss": "npm run __stylelintPlugin",
+    "precommitJs": "npm run __eslintPlugin",
+    "precommit": "npm run precommitJs && npm run precommitCss",
+    "precommitPhp": "phpcs --standard=vendor/infinum/coding-standards-wp/Infinum inc",
+    "autofixPhp": "phpcbf --standard=vendor/infinum/coding-standards-wp/Infinum inc",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js"
   },

@@ -1,3 +1,5 @@
-import pluginData from './plugin-data';
+/**
+ * Text Domain: wp-boilerplate
+ */
 
-wp.i18n.setLocaleData({'': {}}, pluginData.textDomain);
+wp.i18n.setLocaleData({'': {}}, 'wp-boilerplate');

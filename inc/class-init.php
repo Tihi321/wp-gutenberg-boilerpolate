@@ -32,7 +32,7 @@ final class Init {
         Base\Enqueue::class,
         Lib\Block_Templates::class,
         Lib\Meta_Boxes::class,
-        Blocks\WpExampleBlock::class,
+        Blocks\Wp_Example_Block::class,
     ];
   }
 
