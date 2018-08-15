@@ -25,4 +25,9 @@
       "ReplaceBooleanAndOr",
       "SortUseNameSpace",
     ],
+  "stylelint.enable": true,
+  "css.validate": false,
+  "prettier.eslintIntegration": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.enable": true,
 }
