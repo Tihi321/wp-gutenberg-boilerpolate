@@ -47,7 +47,7 @@ Node 8+
 # Setup
 
 Download this folder in your plugins directory, change folder name, plugin name and text domain, then update variables in these files
-- src/plugin-data.js
+- src/plugin-consts.js
 - inc/helpers/consts.php
 
 Below you will find some information on how to run scripts.

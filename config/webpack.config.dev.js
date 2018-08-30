@@ -21,15 +21,27 @@
  */
 
 const paths = require('./paths');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractConfig = (styleLoader) => {
-  return [
+// Main CSS loader for everything but blocks..
+const blocksCSSPlugin = new ExtractTextPlugin({
 
-    // "postcss" loader applies autoprefixer to our CSS.
-    styleLoader,
-    {loader: 'css-loader'},
-    {loader: 'postcss-loader'},
+  // Extracts CSS into a build folder inside the directory current directory
+  filename: './assets/css/blocks.frontend.style.css',
+});
+
+// Main CSS loader for everything but blocks..
+const editBlocksCSSPlugin = new ExtractTextPlugin({
+
+  // Extracts CSS into a build folder inside the directory current directory
+  filename: './assets/css/blocks.editor.style.css',
+});
+
+const extractConfig = {
+  use: [
+    { loader: 'css-loader' },
+    { loader: 'postcss-loader' },
     {
       loader: 'sass-loader',
       options: {
@@ -39,17 +51,8 @@ const extractConfig = (styleLoader) => {
         outputStyle: 'nested',
       },
     },
-  ];
+  ],
 };
-
-function filterByEntryPoint(entry) {
-  return function(module, chunks) {
-    if (module.rawRequest === `./${entry}.scss`) {
-      return true;
-    }
-    return false;
-  };
-}
 
 // Export configuration.
 module.exports = {
@@ -86,20 +89,20 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /style\.s?css$/,
         exclude: /(node_modules|bower_components)/,
-        use: extractConfig(MiniCssExtractPlugin.loader),
+        use: blocksCSSPlugin.extract(extractConfig),
+      },
+      {
+        test: /editor\.s?css$/,
+        exclude: /(node_modules|bower_components)/,
+        use: editBlocksCSSPlugin.extract(extractConfig),
       },
     ],
   },
 
   // Add plugins.
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].css',
-    }),
-  ],
+  plugins: [blocksCSSPlugin, editBlocksCSSPlugin],
   stats: 'minimal',
 
   // stats: 'errors-only',
@@ -110,22 +113,5 @@ module.exports = {
     ga: 'ga', // Old Google Analytics.
     gtag: 'gtag', // New Google Analytics.
     jquery: 'jQuery', // import $ from 'jquery' // Use the WordPress version.
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        frontend: {
-          test: /style\.scss/,
-          name: './assets/css/blocks.frontend.style',
-          enforce: true,
-        },
-        editor: {
-          test: /editor\.scss/,
-          name: './assets/css/blocks.editor.style',
-          enforce: true,
-        },
-      },
-    },
   },
 };
