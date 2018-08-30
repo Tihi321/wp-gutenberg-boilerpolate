@@ -22,18 +22,29 @@
 
 const paths = require('./paths');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = 'true' === process.env.GENERATE_SOURCEMAP;
 
-const extractConfig = (styleLoader) => {
-  return [
+// Main CSS loader for everything but blocks..
+const blocksCSSPlugin = new ExtractTextPlugin({
 
-    // "postcss" loader applies autoprefixer to our CSS.
-    styleLoader,
+  // Extracts CSS into a build folder inside the directory current directory
+  filename: './assets/css/blocks.frontend.style.css',
+});
+
+// Main CSS loader for everything but blocks..
+const editBlocksCSSPlugin = new ExtractTextPlugin({
+
+  // Extracts CSS into a build folder inside the directory current directory
+  filename: './assets/css/blocks.editor.style.css',
+});
+
+const extractConfig = {
+  use: [
     { loader: 'css-loader' },
     { loader: 'postcss-loader' },
     {
@@ -45,7 +56,7 @@ const extractConfig = (styleLoader) => {
         outputStyle: 'nested',
       },
     },
-  ];
+  ],
 };
 
 // Export configuration.
@@ -83,19 +94,22 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /style\.s?css$/,
         exclude: /(node_modules|bower_components)/,
-        use: extractConfig(MiniCssExtractPlugin.loader),
+        use: blocksCSSPlugin.extract(extractConfig),
+      },
+      {
+        test: /editor\.s?css$/,
+        exclude: /(node_modules|bower_components)/,
+        use: editBlocksCSSPlugin.extract(extractConfig),
       },
     ],
   },
 
   // Add plugins.
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].css',
-    }),
+    blocksCSSPlugin,
+    editBlocksCSSPlugin,
   ],
   stats: 'minimal',
 
@@ -130,20 +144,5 @@ module.exports = {
         cssProcessorOptions: { discardComments: { removeAll: true } },
       }),
     ],
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        frontend: {
-          test: /style\.scss/,
-          name: './assets/css/blocks.frontend.style',
-          enforce: true,
-        },
-        editor: {
-          test: /editor\.scss/,
-          name: './assets/css/blocks.editor.style',
-          enforce: true,
-        },
-      },
-    },
   },
 };
