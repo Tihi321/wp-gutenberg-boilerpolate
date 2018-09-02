@@ -3,16 +3,13 @@
  *
  * Text Domain: wp-boilerplate
  */
+
+import {registerBlockType} from '@wordpress/blocks';
+import {__} from '@wordpress/i18n';
 import icons from './icons';
 import pluginConsts from '../../plugin-consts';
 import './style.scss';
 import './editor.scss';
-
-/**
- * Internal block libraries
- */
-const {__} = wp.i18n;
-const {registerBlockType} = wp.blocks;
 
 /**
  * Register block
@@ -20,11 +17,12 @@ const {registerBlockType} = wp.blocks;
 export default registerBlockType(
   `${pluginConsts.pluginName}/wp-example-block`,
   {
-    title: __('Title of the block', 'wp-boilerplate'),
+    title: __('Example Dynamic Block', 'wp-boilerplate'),
     description: __('Description for the side panel', 'wp-boilerplate'),
     category: 'common',
     icon: {
-      background: 'rgba(254, 243, 224, 0.52)',
+      background: '#2196F3',
+      foreground: '#FFFFFF',
       src: icons.default,
     },
     keywords: [

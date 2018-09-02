@@ -29,12 +29,33 @@
 	},
 	"plugins": ["react", "jsx-a11y", "jest"],
 	"settings": {
+    "import/core-modules": [
+      "@wordpress/components",
+      "@wordpress/blocks",
+      "@wordpress/element",
+      "@wordpress/editor",
+      "@wordpress/date",
+      "@wordpress/data",
+      "@wordpress/i18n",
+      "react",
+      "react-dom",
+      "ga",
+      "gtag",
+      "jquery"
+     ],
 		"react": {
 			"pragma": "wp"
 		}
 	},
 	"rules": {
-		"allowImportExportEverywhere": true,
+    "allowImportExportEverywhere": true,
+      "yoda": [
+        "error",
+        "never",
+        {
+          "exceptRange": true
+        }
+        ],
 				"no-duplicate-imports": 2,
 				"no-mixed-operators": 1,
 				"no-unsafe-negation": 1,

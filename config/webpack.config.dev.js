@@ -24,6 +24,16 @@ const paths = require('./paths');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const wplib = [
+  'components',
+  'blocks',
+  'element',
+  'editor',
+  'date',
+  'data',
+  'i18n',
+];
+
 // Main CSS loader for everything but blocks..
 const blocksCSSPlugin = new ExtractTextPlugin({
 
@@ -68,6 +78,8 @@ module.exports = {
     // The dist folder.
     path: paths.pluginDist,
     filename: '[name].js', // [name] = './dist/blocks.build' as defined above.
+    library: ['wp', '[name]'],
+    libraryTarget: 'window',
   },
 
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
@@ -107,11 +119,18 @@ module.exports = {
 
   // stats: 'errors-only',
   // Add externals.
-  externals: {
+  externals: wplib.reduce((externals, lib) => {
+    externals[`@wordpress/${lib}`] = {
+      window: ['wp', lib],
+    };
+
+    return externals;
+  },
+  {
     react: 'React',
     'react-dom': 'ReactDOM',
     ga: 'ga', // Old Google Analytics.
     gtag: 'gtag', // New Google Analytics.
     jquery: 'jQuery', // import $ from 'jquery' // Use the WordPress version.
-  },
+  }),
 };

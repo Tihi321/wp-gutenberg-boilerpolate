@@ -46,7 +46,15 @@ class Enqueue {
     wp_enqueue_script(
       Consts::SCRIPTS_DOMAIN_EDITOR,
       Consts::get_url() . Consts::EDITOR_JS_PATH,
-      [ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components' ],
+      [
+        'wp-components',
+        'wp-blocks',
+        'wp-element',
+        'wp-editor',
+        'wp-date',
+        'wp-data',
+        'wp-i18n',
+    ],
       filemtime( Consts::get_path() . Consts::EDITOR_JS_PATH )
     );
 

@@ -26,6 +26,17 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const wplib = [
+  'components',
+  'blocks',
+  'element',
+  'editor',
+  'date',
+  'data',
+  'i18n',
+];
+
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = 'true' === process.env.GENERATE_SOURCEMAP;
 
@@ -73,6 +84,8 @@ module.exports = {
     // The dist folder.
     path: paths.pluginDist,
     filename: '[name].js', // [name] = './dist/blocks.build' as defined above.
+    library: ['wp', '[name]'],
+    libraryTarget: 'window',
   },
 
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
@@ -111,14 +124,8 @@ module.exports = {
     blocksCSSPlugin,
     editBlocksCSSPlugin,
   ],
-  stats: 'minimal',
 
-  // stats: 'errors-only',
-  // Add externals.
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-  },
+  stats: 'minimal',
   optimization: {
     minimizer: [
 
@@ -145,4 +152,21 @@ module.exports = {
       }),
     ],
   },
+
+  // stats: 'errors-only',
+  // Add externals.
+  externals: wplib.reduce((externals, lib) => {
+    externals[`@wordpress/${lib}`] = {
+      window: ['wp', lib],
+    };
+
+    return externals;
+  },
+  {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    ga: 'ga', // Old Google Analytics.
+    gtag: 'gtag', // New Google Analytics.
+    jquery: 'jQuery', // import $ from 'jquery' // Use the WordPress version.
+  }),
 };
