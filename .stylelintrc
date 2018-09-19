@@ -1,4 +1,4 @@
 {
   "extends": "@infinumjs/stylelint-config",
-  "ignoreFiles": [ "assets/**/*.css", "vendor/**/*.css", "node_modules/**/*.css" ]
+  "ignoreFiles": [ "assets/**/*.css", "vendor/**/*.css", "node_modules/**/*.css", "**/*.js", "**/*.jsx" ]
 }
